@@ -1,0 +1,42 @@
+
+<html>
+    <head>
+    <title>Demo IO</title>
+    <script src="jquery.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    
+    <script>
+        
+        var socket = io("http://localhost:8000");
+        $(document).ready(function(){
+        $('#Send-message').click(function(){
+            var textContent = $('.text-content').val();
+            socket.emit("Client-send",textContent); // Gui message len server
+
+        })
+    })
+
+    socket.on("Server-send", function(data){
+        $('.contentRep').append(data +"<br>");
+
+    })
+    
+    </script>
+    </head>
+    <body>
+        <h>
+            Demo app SocketIO
+        </h1>
+        <br>
+        <input type="text" id="userName"> <button id="register">Register</button>
+        <textarea class="text-content" rows="4" cols="50">
+         <div class="list-user"></div>
+        </textarea>
+       <button id="Send-message">
+        Send message
+       </button>
+       <div class="contentRep"></div>
+    </body>
+</html>
+
